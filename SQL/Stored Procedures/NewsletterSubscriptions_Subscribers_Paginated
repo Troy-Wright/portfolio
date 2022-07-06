@@ -1,0 +1,54 @@
+USE [Kommu]
+GO
+/****** Object:  StoredProcedure [dbo].[NewsletterSubscriptions_Subscribers_Paginated]    Script Date: 7/6/2022 10:40:47 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author: Troy Wright
+-- Create date: 06/30/22
+-- Description: Get subscribers paginated
+-- Code Reviewer: Brian Yeo
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:N/A
+-- =============================================
+ALTER proc [dbo].[NewsletterSubscriptions_Subscribers_Paginated]
+		 @PageIndex int
+		,@PageSize int
+		,@IsSubscribed bit
+as
+
+/*
+
+		Declare  @PageIndex int = 0
+				,@PageSize int = 10
+				,@IsSubscribed bit = 1
+
+		Execute [dbo].[NewsletterSubscriptions_Subscribers_Paginated]
+																	 @PageIndex
+																	,@PageSize
+																	,@IsSubscribed
+
+*/
+
+BEGIN
+	
+	Declare @offset int = @PageIndex * @PageSize
+		
+		SELECT [Email]
+			  ,[IsSubscribed]
+			  ,[DateCreated]
+			  ,[DateModified]
+			  ,[TotalCount] = COUNT(1) OVER()
+		FROM [dbo].[NewsletterSubscriptions]
+		WHERE IsSubscribed = @IsSubscribed
+		ORDER BY DateCreated ASC
+
+		OFFSET @Offset ROWS
+		FETCH NEXT @PageSize ROWS ONLY
+
+END
