@@ -2,7 +2,7 @@
 Kommu is an upcoming residence exchange network, where users can register and swap houses with other verified users, 
 enabling affordable lodging during any of their travels.
 
-Feel free to browse through my work.
+## Feel free to browse through my work.
 Here are some previews of what I've created...
 
 # Component that subscribes an email to the Kommu newsletter
