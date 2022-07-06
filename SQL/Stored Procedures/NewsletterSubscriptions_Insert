@@ -1,0 +1,51 @@
+USE [Kommu]
+GO
+/****** Object:  StoredProcedure [dbo].[NewsletterSubscriptions_Insert]    Script Date: 7/6/2022 10:37:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author: Troy Wright
+-- Create date: 06/09/22
+-- Description: Insert for NewsletterSubscriptions
+-- Code Reviewer: James Maye
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:N/A
+-- =============================================
+ALTER proc [dbo].[NewsletterSubscriptions_Insert]
+		 @Email nvarchar(255)
+		,@IsSubscribed bit
+
+
+/* -----------Test Code-----------
+
+		Declare  @Email nvarchar(255) = 'testemail@email.com'
+				,@IsSubscribed bit = 1
+
+		Execute [dbo].[NewsletterSubscriptions_Insert]
+				 @Email
+				,@IsSubscribed									
+
+		SELECT *
+		FROM [dbo].[NewsLetterSubscriptions]
+
+*/
+
+as	
+
+BEGIN
+
+
+INSERT INTO [dbo].[NewsletterSubscriptions]
+           ([Email]
+           ,[IsSubscribed])
+     VALUES
+           (@Email
+           ,@IsSubscribed)
+
+
+END
