@@ -1,0 +1,57 @@
+USE [Kommu]
+GO
+/****** Object:  StoredProcedure [dbo].[NewsletterSubscriptions_Update]    Script Date: 7/6/2022 10:42:37 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- =============================================
+-- Author: Troy Wright
+-- Create date: 06/09/22
+-- Description: Update for NewsletterSubscriptions
+-- Code Reviewer: James Maye
+
+-- MODIFIED BY: 
+-- MODIFIED DATE:
+-- Code Reviewer:
+-- Note:N/A
+-- =============================================
+
+ALTER proc [dbo].[NewsletterSubscriptions_Update]
+			 @Email nvarchar(255)
+			,@IsSubscribed bit
+
+AS
+
+/*--------------Test Code--------------
+
+		Declare @Email nvarchar(255) = 'testemail8@email.com';
+
+		Declare @IsSubscribed bit = 1
+
+		SELECT *
+		FROM [dbo].[NewsletterSubscriptions]	
+		WHERE Email = @Email 
+
+		Execute [dbo].[NewsletterSubscriptions_Update]
+				 @Email
+				,@IsSubscribed
+
+		SELECT *
+		FROM [dbo].[NewsletterSubscriptions]
+		WHERE Email = @Email 
+
+*/
+
+BEGIN
+
+		Declare @datNow datetime2 = getutcdate()
+
+		UPDATE [dbo].[NewsletterSubscriptions]
+		   SET [IsSubscribed] = @IsSubscribed
+			  ,[DateModified] = @datNow
+
+			WHERE Email = @Email
+
+END
